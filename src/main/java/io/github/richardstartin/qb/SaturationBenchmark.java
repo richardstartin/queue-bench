@@ -39,6 +39,35 @@ public class SaturationBenchmark {
   @Benchmark
   @Threads(1)
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
+  public void offerManyToOneArrayQueue1(ManyToOneConcurrentArrayQueueState qState, MessagesState mState, Counters counters) {
+    offerToFixedCapacityQueue(qState, mState, counters);
+  }
+
+  @Benchmark
+  @Threads(2)
+  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
+  public void offerManyToOneArrayQueue2(ManyToOneConcurrentArrayQueueState qState, MessagesState mState, Counters counters) {
+    offerToFixedCapacityQueue(qState, mState, counters);
+  }
+
+  @Benchmark
+  @Threads(4)
+  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
+  public void offerManyToOneArrayQueue4(ManyToOneConcurrentArrayQueueState qState, MessagesState mState, Counters counters) {
+    offerToFixedCapacityQueue(qState, mState, counters);
+  }
+
+
+  @Benchmark
+  @Threads(8)
+  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
+  public void offerManyToOneArrayQueue8(ManyToOneConcurrentArrayQueueState qState, MessagesState mState, Counters counters) {
+    offerToFixedCapacityQueue(qState, mState, counters);
+  }
+
+  @Benchmark
+  @Threads(1)
+  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
   public void offerLinkedBlockingQueue1(LinkedBlockingQueueState qState, MessagesState mState, Counters counters) {
     offerToFixedCapacityQueue(qState, mState, counters);
   }
