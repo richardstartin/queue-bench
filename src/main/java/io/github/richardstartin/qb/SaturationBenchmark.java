@@ -3,6 +3,7 @@ package io.github.richardstartin.qb;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.CompilerControl;
 import org.openjdk.jmh.annotations.Threads;
+import org.openjdk.jmh.infra.Blackhole;
 
 public class SaturationBenchmark {
 
@@ -32,6 +33,35 @@ public class SaturationBenchmark {
   @Threads(8)
   @CompilerControl(CompilerControl.Mode.DONT_INLINE)
   public void offerArrayBlockingQueue8(ArrayBlockingQueueState qState, MessagesState mState, Counters counters) {
+    offerToFixedCapacityQueue(qState, mState, counters);
+  }
+
+  @Benchmark
+  @Threads(1)
+  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
+  public void offerLinkedBlockingQueue1(LinkedBlockingQueueState qState, MessagesState mState, Counters counters) {
+    offerToFixedCapacityQueue(qState, mState, counters);
+  }
+
+  @Benchmark
+  @Threads(2)
+  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
+  public void offerLinkedBlockingQueue2(LinkedBlockingQueueState qState, MessagesState mState, Counters counters) {
+    offerToFixedCapacityQueue(qState, mState, counters);
+  }
+
+  @Benchmark
+  @Threads(4)
+  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
+  public void offerLinkedBlockingQueue4(LinkedBlockingQueueState qState, MessagesState mState, Counters counters) {
+    offerToFixedCapacityQueue(qState, mState, counters);
+  }
+
+
+  @Benchmark
+  @Threads(8)
+  @CompilerControl(CompilerControl.Mode.DONT_INLINE)
+  public void offerLinkedBlockingQueue8(LinkedBlockingQueueState qState, MessagesState mState, Counters counters) {
     offerToFixedCapacityQueue(qState, mState, counters);
   }
 
@@ -103,5 +133,6 @@ public class SaturationBenchmark {
     } else {
       counters.drops++;
     }
+    Blackhole.consumeCPU(mState.backoff);
   }
 }

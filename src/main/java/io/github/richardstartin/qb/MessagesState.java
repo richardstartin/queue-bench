@@ -1,14 +1,14 @@
 package io.github.richardstartin.qb;
 
-import org.openjdk.jmh.annotations.Level;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.*;
 
 import java.util.Arrays;
 
 @State(Scope.Thread)
 public class MessagesState {
+
+  @Param({"0", "5", "10", "20"})
+  int backoff;
 
   Object[] inputs = new Object[4096];
   int pos = 0;
